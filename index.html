@@ -31,18 +31,19 @@
     <button data-things="The office" class="btn btn-outline-primary">
       I hate looking at your face. I want to smash it
     </button>
-  </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
   <form id="giphy-form">
     <label for="giphy-input">Giphy Me</label>
     <input type="text" id="giphy-input"><br>
-    </div>
+  </div>
 
     <!-- Button triggers new movie to be added -->
     <input id="add-giphy" type="submit" value="You see, I see!" class="btn btn-outline-primary">
   </form>
+  </div>
   <!--Where the giphys will display-->
   <div id="gifs-appear-here">
   </div>
@@ -88,7 +89,7 @@
             $("#gifs-appear-here").prepend(gifDiv);
           }
         });
-      // Pausing giphy on click 
+      // Pausing giphy on click , currently not working
       $(".gif").on("click", function () {
         var state = $(this).attr("data-state");
 
