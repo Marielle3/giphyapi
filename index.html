@@ -13,87 +13,85 @@
 
 <body>
   <div id="buttons">
-    <button data-fallingfails="people falling">
+    <button data-things="people falling">
       Timberrrr!!
     </button>
-    <button data-person="kevin hart">
-      Alright, alright, alllrrriiiggghhhtt! 
+    <button data-things="kevin hart">
+      Alright, alright, alllrrriiiggghhhtt!
     </button>
-    <div id="buttons">
-      <button data-animals="Dogs and Cats">
-        The Cuteness, I can't
-      </button>
+    <button data-things="Dogs and Cats">
+      The Cuteness, I can't
+    </button>
+    <button data-things="Wow Moments">
+      WOW
+    </button>
+    <button data-things="The office">
+      I hate looking at your face. I want to smash it
+    </button>
+  </div>
 
-      <div id="buttons">
-        <button data-wow="Wow Moments">
-          WOW
-        </button>
-        <div id="buttons">
-          <button data-office="The office">
-           I hate looking at your face. I want to smash it
-          </button>
-        </div>
+  <!--Where the giphys will display-->
+  <div id="gifs-appear-here">
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    //searches the ajax for the giphy I put into each button at the top
+    $("button").on("click", function () {
+      var giphyThings = $(this).attr("data-things");
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        giphyThings + "&api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=10";
 
-        <!--Where the giphys will display-->
-        <div id="gifs-appear-here">
-        </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-          crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-          crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-          crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
-          //searches the ajax for the giphy I put into each button at the top
-          $("button").on("click", function () {
-            var fails = $(this).attr("data-fallingfails");
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-              fails + "&api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=10";
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        //creating a variable for the results and the response to the api 
+        .then(function (response) {
+          var results = response.data;
 
-            $.ajax({
-              url: queryURL,
-              method: "GET"
-            })
-              //creating a variable for the results and the response to the api 
-              .then(function (response) {
-                var results = response.data;
+          // looping through the resulting giphys
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div>");
+            //looping,getting the rating for each of the giphys
+            var rating = results[i].rating;
+            //creating a paragraph for rating
+            var p = $("<p>").text("Rating: " + rating);
 
-                // looping through the resulting giphys
-                for (var i = 0; i < results.length; i++) {
-                  var gifDiv = $("<div>");
-                  //looping,getting the rating for each of the giphys
-                  var rating = results[i].rating;
-                  //creating a paragraph for rating
-                  var p = $("<p>").text("Rating: " + rating);
+            var personImage = $("<img>");
+            personImage.attr("src", results[i].images.fixed_height.url);
 
-                  var personImage = $("<img>");
-                  personImage.attr("src", results[i].images.fixed_height.url);
+            gifDiv.prepend(p);
+            gifDiv.prepend(personImage);
 
-                  gifDiv.prepend(p);
-                  gifDiv.prepend(personImage);
+            $("#gifs-appear-here").prepend(gifDiv);
+          }
+        });
+      // Pausing giphy on click 
+      $(".gif").on("click", function () {
+        var state = $(this).attr("data-state");
 
-                  $("#gifs-appear-here").prepend(gifDiv);
-                }
-              });
-              // Pausing giphy on click 
-            $(".gif").on("click", function () {
-              var state = $(this).attr("data-state");
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+        }
+      })
+    });
 
-              if (state === "still") {
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-              } else {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-              }
-            })
-          });
 
-        </script>
+
+  </script>
 </body>
 
 </html>
