@@ -9,28 +9,44 @@
 <!--Bootstrap Css-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!-- Buttons for giphy on the header of the page -->
+<style>
+  body {
+    background-image: url(/Users/marielleibarreta/Downloads/dynamic-style/dynamic-style.png);
+  }
+</style>
+
+  <!-- Buttons for giphy on the header of the page -->
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
       
 <body>
   <div id="buttons">
-    <button data-things="fail" class="btn btn-outline-primary">
+    <span>
+    <button data-things="fail" class="badge btn-outline-primary">
       Timberrrr!!
     </button>
-    <button data-things="kevin hart" class="btn btn-outline-primary">
+  </span>
+    <span>
+    <button data-things="kevin hart" class="badge btn-outline-primary">
       Alright, alright, alllrrriiiggghhhtt!
     </button>
-    <button data-things="Dogs and Cats" class="btn btn-outline-primary">
+  </span>
+    <span>
+    <button data-things="fluffy dogs" class="badge btn-outline-primary">
       The Cuteness, I can't
     </button>
-    <button data-things="Wow Moments" class="btn btn-outline-primary">
+  </span>
+    <span>
+    <button data-things="Wow Moments" class="badge btn-outline-primary">
       WOW
     </button>
-    <button data-things="The office" class="btn btn-outline-primary">
+  </span>
+    <span>
+    <button data-things="The office" class="badge btn-outline-primary">
       I hate looking at your face. I want to smash it
     </button>
+  </span>
     </div>
   </div>
   <div class="row">
@@ -44,7 +60,7 @@
   </div>
 
     <!-- Button triggers new giphy to be added -->
-    <input id="add-giphy" type="submit" value="You see, I see!" class="btn btn-outline-primary">
+    <input id="add-giphy" type="submit" value="You see, I see!" class="btn btn-primary">
   </form>
   </div>
   <!--Where the giphys will display-->
