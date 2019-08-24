@@ -10,26 +10,39 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!-- Buttons for giphy on the header of the page -->
-
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      
 <body>
   <div id="buttons">
-    <button data-things="people falling">
+    <button data-things="people falling" class="btn btn-outline-primary">
       Timberrrr!!
     </button>
-    <button data-things="kevin hart">
+    <button data-things="kevin hart" class="btn btn-outline-primary">
       Alright, alright, alllrrriiiggghhhtt!
     </button>
-    <button data-things="Dogs and Cats">
+    <button data-things="Dogs and Cats" class="btn btn-outline-primary">
       The Cuteness, I can't
     </button>
-    <button data-things="Wow Moments">
+    <button data-things="Wow Moments" class="btn btn-outline-primary">
       WOW
     </button>
-    <button data-things="The office">
+    <button data-things="The office" class="btn btn-outline-primary">
       I hate looking at your face. I want to smash it
     </button>
   </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+  <form id="giphy-form">
+    <label for="giphy-input">Giphy Me</label>
+    <input type="text" id="giphy-input"><br>
+    </div>
 
+    <!-- Button triggers new movie to be added -->
+    <input id="add-giphy" type="submit" value="You see, I see!" class="btn btn-outline-primary">
+  </form>
   <!--Where the giphys will display-->
   <div id="gifs-appear-here">
   </div>
