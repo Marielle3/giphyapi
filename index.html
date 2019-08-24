@@ -16,7 +16,7 @@
       
 <body>
   <div id="buttons">
-    <button data-things="people falling" class="btn btn-outline-primary">
+    <button data-things="fail" class="btn btn-outline-primary">
       Timberrrr!!
     </button>
     <button data-things="kevin hart" class="btn btn-outline-primary">
@@ -64,8 +64,8 @@
     //searches the ajax for the giphy I put into each button at the top
     $("button").on("click", function () {
       var giphyThings = $(this).attr("data-things");
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        giphyThings + "&api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=10";
+      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=" +
+      giphyThings + "&limit=10";
 
       $.ajax({
         url: queryURL,
