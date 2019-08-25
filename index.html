@@ -13,128 +13,147 @@
   body {
     background-image: url(/Users/marielleibarreta/Downloads/dynamic-style/dynamic-style.png);
   }
+
+  .container-side {
+    position: relative;
+
+  }
 </style>
 
-  <!-- Buttons for giphy on the header of the page -->
+<!-- Buttons for giphy on the header of the page -->
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      
-<body>
-  <div id="buttons">
-    <span>
-    <button data-things="fail" class="badge btn-outline-primary">
-      Timberrrr!!
-    </button>
-  </span>
-    <span>
-    <button data-things="kevin hart" class="badge btn-outline-primary">
-      Alright, alright, alllrrriiiggghhhtt!
-    </button>
-  </span>
-    <span>
-    <button data-things="fluffy dogs" class="badge btn-outline-primary">
-      The Cuteness, I can't
-    </button>
-  </span>
-    <span>
-    <button data-things="Wow Moments" class="badge btn-outline-primary">
-      WOW
-    </button>
-  </span>
-    <span>
-    <button data-things="The office" class="badge btn-outline-primary">
-      I hate looking at your face. I want to smash it
-    </button>
-  </span>
+
+      <body>
+        <div id="buttons">
+          <span>
+            <button data-things="fail" class="badge btn-outline-primary">
+              Timberrrr!!
+            </button>
+          </span>
+          <span>
+            <button data-things="kevin hart" class="badge btn-outline-primary">
+              Alright, alright, alllrrriiiggghhhtt!
+            </button>
+          </span>
+          <span>
+            <button data-things="fluffy dogs" class="badge btn-outline-primary">
+              The Cuteness, I can't
+            </button>
+          </span>
+          <span>
+            <button data-things="Wow Moments" class="badge btn-outline-primary">
+              WOW
+            </button>
+          </span>
+          <span>
+            <button data-things="The office" class="badge btn-outline-primary">
+              I hate looking at your face. I want to smash it
+            </button>
+          </span>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- New Buttons gets dumped here-->
+        <div id="buttons-view"></div>
+
+        <form id="giphy-form">
+          <label for="giphy-input">Giphy Me</label>
+          <input type="text" id="giphy-input"><br>
+      </div>
+
+      <!-- Button triggers new giphy to be added -->
+      <input id="add-giphy" type="submit" value="You see, I see!" class="btn btn-primary">
+      </form>
+    </div>
+    <!--Where the giphys will display-->
+    <div id="gifs-appear-here">
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-6">
-<!-- New Buttons gets dumped here-->
-  <div id="buttons-view"></div>    
+  <div class="container-side">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="d-flex justify-content-end">
+          <div class="card">
+            <h5 class="card-header">Favorites</h5>
+            <div class="card-body">
+              Watch Again!
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script type="text/javascript">
+        //searches the ajax for the giphy I put into each button at the top
+        $("button").on("click", function () {
+          var giphyThings = $(this).attr("data-things");
+          var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=" +
+            giphyThings + "&limit=10";
 
-  <form id="giphy-form">
-    <label for="giphy-input">Giphy Me</label>
-    <input type="text" id="giphy-input"><br>
-  </div>
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          })
+            //creating a variable for the results and the response to the api 
+            .then(function (response) {
+              var results = response.data;
 
-    <!-- Button triggers new giphy to be added -->
-    <input id="add-giphy" type="submit" value="You see, I see!" class="btn btn-primary">
-  </form>
-  </div>
-  <!--Where the giphys will display-->
-  <div id="gifs-appear-here">
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    //searches the ajax for the giphy I put into each button at the top
-    $("button").on("click", function () {
-      var giphyThings = $(this).attr("data-things");
-      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=" +
-      giphyThings + "&limit=10";
+              // looping through the resulting giphys
+              for (var i = 0; i < results.length; i++) {
+                var gifDiv = $("<div>");
+                //looping,getting the rating for each of the giphys
+                var rating = results[i].rating;
+                //creating a paragraph for rating
+                var p = $("<p>").text("Rating: " + rating);
 
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
-        //creating a variable for the results and the response to the api 
-        .then(function (response) {
-          var results = response.data;
+                var giphyImage = $("<img>");
+                giphyImage.attr("src", results[i].images.fixed_height.url);
 
-          // looping through the resulting giphys
-          for (var i = 0; i < results.length; i++) {
-            var gifDiv = $("<div>");
-            //looping,getting the rating for each of the giphys
-            var rating = results[i].rating;
-            //creating a paragraph for rating
-            var p = $("<p>").text("Rating: " + rating);
+                gifDiv.prepend(p);
+                gifDiv.prepend(giphyImage);
 
-            var giphyImage = $("<img>");
-            giphyImage.attr("src", results[i].images.fixed_height.url);
+                $("#gifs-appear-here").prepend(gifDiv);
+              }
+            });
+          //   //function for displaying new added giphs
+          //   function renderButtons() {
+          //     $('#buttons-view').empty()
+          //   //loop through array 
+          //   for (var i = 0; i < giphyThings; i++) {
 
-            gifDiv.prepend(p);
-            gifDiv.prepend(giphyImage);
+          //     var a = $('<button>');
+          //     a.addClass('topic');
+          //     a.attr('data-things', giphyThings[i]);
+          //     a.text(giphyThings[i]);
+          //     $('#buttons-view').append(a);
 
-            $("#gifs-appear-here").prepend(gifDiv);
-          }
-      });
-    //   //function for displaying new added giphs
-    //   function renderButtons() {
-    //     $('#buttons-view').empty()
-    //   //loop through array 
-    //   for (var i = 0; i < giphyThings; i++) {
+          //   }
+          // }
 
-    //     var a = $('<button>');
-    //     a.addClass('topic');
-    //     a.attr('data-things', giphyThings[i]);
-    //     a.text(giphyThings[i]);
-    //     $('#buttons-view').append(a);
+          //function for grabbing the input in the textbox and adding to the original array
+          $('#add-giphy').on('click', function (event) {
+            event.preventDefault();
 
-    //   }
-    // }
+            var giphy = $('#giphy-input').val().trim();
 
-      //function for grabbing the input in the textbox and adding to the original array
-      $('#add-giphy').on('click', function(event){
-        event.preventDefault();
+            giphyThings.push(giphy);
 
-        var giphy = $('#giphy-input').val().trim();
+            renderButtons();
 
-        giphyThings.push(giphy);
-
-        renderButtons();
-
-      })
-    });
+          })
+        });
     //   Pausing giphy on click , currently not working
     //   $(".gif").on("click", function () {
     //     var state = $(this).attr("data-state");
@@ -151,7 +170,7 @@
 
 
 
-  </script>
-</body>
+      </script>
+      </body>
 
 </html>
