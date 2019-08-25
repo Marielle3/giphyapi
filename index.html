@@ -17,7 +17,6 @@
 
   .container-side {
     position: relative;
-
   }
 </style>
 
@@ -102,7 +101,6 @@
           var giphyThings = $(this).attr("data-things");
           var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=oGhGI2AOzxwr37G8B308gEYNpCqAsVTM&q=" +
             giphyThings + "&limit=10";
-
           $.ajax({
             url: queryURL,
             method: "GET"
@@ -110,7 +108,6 @@
             //creating a variable for the results and the response to the api 
             .then(function (response) {
               var results = response.data;
-
               // looping through the resulting giphys
               for (var i = 0; i < results.length; i++) {
                 var gifDiv = $("<div>");
@@ -118,47 +115,36 @@
                 var rating = results[i].rating;
                 //creating a paragraph for rating
                 var p = $("<p>").text("Rating: " + rating);
-
                 var giphyImage = $("<img>");
                 giphyImage.attr("src", results[i].images.fixed_height.url);
-
                 gifDiv.prepend(p);
                 gifDiv.prepend(giphyImage);
-
                 $("#gifs-appear-here").prepend(gifDiv);
               }
             });
-          //   //function for displaying new added giphs
-          //   function renderButtons() {
-          //     $('#buttons-view').empty()
-          //   //loop through array 
-          //   for (var i = 0; i < giphyThings; i++) {
-
-          //     var a = $('<button>');
-          //     a.addClass('topic');
-          //     a.attr('data-things', giphyThings[i]);
-          //     a.text(giphyThings[i]);
-          //     $('#buttons-view').append(a);
-
-          //   }
-          // }
-
+          //function for displaying new added giphs
+          function renderButtons() {
+            $('#buttons-view').empty()
+            //loop through array 
+            for (var i = 0; i < giphyThings; i++) {
+              var a = $('<button>');
+              a.addClass('giphy-btn');
+              a.attr('data-things', giphyThings[i]);
+              a.text(giphyThings[i]);
+              $('#buttons-view').append(a);
+            }
+          }
           //function for grabbing the input in the textbox and adding to the original array
           $('#add-giphy').on('click', function (event) {
             event.preventDefault();
-
-            var giphy = $('#giphy-input').val().trim();
-
+            var giphy = $('#add-giphy').val().trim();
             giphyThings.push(giphy);
-
             renderButtons();
-
           })
         });
     //   Pausing giphy on click , currently not working
     //   $(".gif").on("click", function () {
     //     var state = $(this).attr("data-state");
-
     //     if (state === "still") {
     //       $(this).attr("src", $(this).attr("data-animate"));
     //       $(this).attr("data-state", "animate");
@@ -168,9 +154,6 @@
     //     }
     //   })
     // });
-
-
-
       </script>
       </body>
 
